@@ -1,10 +1,17 @@
 import React, { useContext } from 'react'
-import { StyleSheet, Text, View, Button, FlatList } from 'react-native'
+import {
+  StyleSheet,
+  Text,
+  View,
+  Button,
+  FlatList,
+  TouchableOpacity,
+} from 'react-native'
 import { Context } from '../context/BlogContext'
 import { Feather } from '@expo/vector-icons'
 
 export default () => {
-  const { state, addBlogPost } = useContext(Context)
+  const { state, addBlogPost, deleteBlogPost } = useContext(Context)
 
   return (
     <View>
@@ -14,8 +21,12 @@ export default () => {
         keyExtractor={post => post.title}
         renderItem={({ item }) => (
           <View style={styles.row}>
-            <Text style={styles.title}>{item.title}</Text>
-            <Feather name="trash" style={styles.icon} />
+            <Text style={styles.title}>
+              {item.title} - {item.id}
+            </Text>
+            <TouchableOpacity onPress={() => deleteBlogPost(item.id)}>
+              <Feather name="trash" style={styles.icon} />
+            </TouchableOpacity>
           </View>
         )}
       />

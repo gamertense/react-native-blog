@@ -4,7 +4,15 @@ import createDataContext from './createDataContext'
 const blogReducer = (state, action) => {
   switch (action.type) {
     case 'ADD_BLOGPOST':
-      return [...state, { title: `blog post #${state.length + 1}` }]
+      return [
+        ...state,
+        {
+          id: Math.floor(Math.random() * 888),
+          title: `blog post #${state.length + 1}`,
+        },
+      ]
+    case 'DELETE_BLOGPOST':
+      return state.filter(blogPost => blogPost.id !== action.payload)
   }
 }
 
@@ -14,8 +22,14 @@ const addBlogPost = dispatch => {
   }
 }
 
+const deleteBlogPost = dispatch => {
+  return id => {
+    dispatch({ type: 'DELETE_BLOGPOST', payload: id })
+  }
+}
+
 export const { Context, Provider } = createDataContext(
   blogReducer,
-  { addBlogPost },
-  []
+  { addBlogPost, deleteBlogPost },
+  [{ id: Math.floor(Math.random() * 888), title: 'blog post #1' }]
 )
