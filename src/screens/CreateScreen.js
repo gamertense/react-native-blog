@@ -1,10 +1,15 @@
-import React, { useState } from 'react'
-import { StyleSheet, View, Text, TextInput } from 'react-native'
-// import { Context } from '../context/BlogContext'
+import React, { useContext, useState } from 'react'
+import { StyleSheet, View, Text, TextInput, Button } from 'react-native'
+import { Context } from '../context/BlogContext'
 
 export default ({ navigation }) => {
+  const { addBlogPost } = useContext(Context)
   const [title, setTitle] = useState('')
   const [content, setContent] = useState('')
+
+  const handleAddBtn = () => {
+    addBlogPost(title, content, () => navigation.navigate('Index'))
+  }
 
   return (
     <View>
@@ -20,6 +25,7 @@ export default ({ navigation }) => {
         onChangeText={text => setContent(text)}
         style={styles.input}
       />
+      <Button title="Add Blog Post" onPress={handleAddBtn} />
     </View>
   )
 }
