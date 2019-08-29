@@ -21,10 +21,10 @@ $ git clone https://github.com/gamertense/jsonserver-blogposts
 Start fake JSON server with these commands (two terminals):
 
 ```bash
-cd jsonserver-blogposts
-yarn install
-yarn run db
-yarn run tunnel
+$ cd jsonserver-blogposts
+$ yarn install
+$ yarn run db
+$ yarn run tunnel
 ```
 
 Copy URL from the second running terminal and paste it in `src/api/jsonServer.js` with newer `baseURL` value:
@@ -38,7 +38,7 @@ export default axios.create({
 Navigate to this project directory and run:
 
 ```javascript
-yarn install && yarn start
+$ yarn install && yarn start
 ```
 
 You can either:
